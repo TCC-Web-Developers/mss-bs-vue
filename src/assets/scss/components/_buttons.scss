@@ -1,0 +1,96 @@
+@use 'sass:color';
+
+@import "~/bootstrap/scss/functions";
+@import "~/bootstrap/scss/mixins";
+
+@import '~/bootstrap/scss/variables';
+@import '@/assets/scss/custom-variables';
+
+@import '~/bootstrap/scss/buttons';
+
+@function get_inverse_black_or_white($color) {
+
+    $sum-rgb: (red($color) * 0.299) + (green($color) * 0.587) + (blue($color) * 0.114);
+
+
+    // @debug "inverse" color.lightness($complement);
+
+    @if  $sum-rgb > 170  {
+        @return #000;
+     
+    } @else {
+        @return #fff;
+    }
+}
+
+
+.btn {
+    .disabled,
+    :disabled {
+    pointer-events: none !important;
+    cursor: not-allowed;
+  }
+}
+
+// scss-docs-start btn-variant-loops
+@each $color, $value in $theme-colors {
+
+    // @debug $color;
+
+    .btn-#{$color} {
+      @include button-variant(
+        $background: $value, 
+        $border: $value,
+        $color: get_inverse_black_or_white($value),
+        $hover-color: get_inverse_black_or_white($value),
+        $active-color: get_inverse_black_or_white($value),
+      );
+
+      &.active,
+      &:active,
+      &:hover,
+      &:focus {
+        border-color: transparent;
+      }
+
+
+      &:hover {
+          box-shadow: 0 4px 11px rgba($value, 0.35);
+      }
+    }
+
+    .btn-outline-#{$color} {
+      @include button-outline-variant(
+        $value,
+        $color-hover: get_inverse_black_or_white($value),
+      )
+    }
+
+    .btn-soft-#{$color} {
+      background: rgba($color: $value, $alpha: 0.25);
+      border-color: transparent;
+      color: $value;
+      
+      &.active,
+      &:active,
+      &:hover,
+      &:focus {
+        border-color: transparent;
+      }
+
+      &:hover {
+        color: get_inverse_black_or_white($value);
+        background: $value;
+      }
+
+      &.disabled,
+      &:disabled {
+        background: rgba($color: $value, $alpha: 0.4);
+        color: $value;
+      }
+    }
+
+  }
+
+
+

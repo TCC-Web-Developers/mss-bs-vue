@@ -1,4 +1,5 @@
 <script setup>
+import BaseButton from '../components/base-button.vue';
 const modalGreeting = ref(null);
 
 function showModalGreeting() {
@@ -11,9 +12,9 @@ function showModalGreeting() {
         <h1>This is an about page</h1>
     </div>
 
-    <button type="button" class="btn btn-warning" @click="showModalGreeting">
+    <BaseButton class="btn btn-info" @click="showModalGreeting">
         Greetings!
-    </button>
+    </BaseButton>
 
     <ModalGreetings ref="modalGreeting"></ModalGreetings>
 </template>

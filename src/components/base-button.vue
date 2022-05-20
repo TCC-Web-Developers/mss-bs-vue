@@ -1,11 +1,70 @@
+<script setup>
+const props = defineProps({
+    theme: {
+        type: String,
+        default: '',
+    },
+    active: {
+        type: Boolean,
+        default: false,
+    },
+    size: {
+        type: String,
+        default: '',
+    },
+    outline: {
+        type: Boolean,
+        default: false,
+    },
+
+    soft: {
+        type: Boolean,
+        default: false,
+    },
+});
+
+const baseClass = 'btn';
+
+const styleClass = reactive({});
+
+const hasTheme = computed(() => {
+    return props.theme.trim() != '';
+});
+
+if (props.soft && hasTheme) {
+    let outlineStyle = baseClass + '-soft-' + props.theme.trim();
+    styleClass[outlineStyle] = true;
+} else if (props.outline && hasTheme) {
+    let outlineStyle = baseClass + '-outline-' + props.theme.trim();
+    styleClass[outlineStyle] = true;
+} else {
+    if (hasTheme) {
+        let themeClass = baseClass + '-' + props.theme.trim();
+        styleClass[themeClass] = true;
+    }
+}
+</script>
+
 <template>
-    <button class="btn">
+    <button
+        class="btn"
+        :type="Object.hasOwn($attrs, 'type') ? $attrs.type : 'button'"
+        :class="{
+            disabled:
+                Object.hasOwn($attrs, 'disabled') && $attrs.disabled != 'false',
+            active: active,
+            ...styleClass,
+        }"
+        :aria-disabled="
+            Object.hasOwn($attrs, 'disabled') && $attrs.disabled != 'false'
+                ? true
+                : null
+        "
+    >
         <slot></slot>
     </button>
 </template>
 
 <style lang="scss" scoped>
-// .btn {
-//     border-radius: 50%;
-// }
+@import '@/assets/scss/components/buttons';
 </style>

@@ -1,2 +1,62 @@
-$primary:       aqua;
+@import "~/bootstrap/scss/functions";
+@import "~/bootstrap/scss/mixins";
 
+
+// COLORS
+$primary:               #377dff;
+$secondary:             #71869d;
+$success:               #00c9a7;
+$info:                  #21c0ce;
+$accent:                #dc450a;
+$warning:               #fbc04c;
+$dark:                  #404040;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+
+// $add-themes: (
+//     "success": $success,
+//   "accent":    $accent,
+//   "info":    $info,
+// ) ;
+
+// $theme-colors: map-merge($map1: $theme-colors, $map2: $add-themes);
+
+
+$btn-border-radius:           0.3125rem;
+$btn-border-radius-sm:        $btn-border-radius;
+$btn-border-radius-lg:        $btn-border-radius;
+
+$font-size-base:            1rem;
+
+
+
+// scss-docs-start theme-color-variables
+
+// $info:          $cyan;
+// $warning:       $yellow;
+// $danger:        $red;
+// $light:         $gray-100;
+// $dark:          $gray-900;
+// scss-docs-end theme-color-variables
+
+// scss-docs-start theme-colors-map
+// $theme-colors: (
+//   "primary":    $primary,
+//   "secondary":  $secondary,
+//   "success":    $success,
+//   "info":       $info,
+//   "warning":    $warning,
+//   "danger":     $danger,
+//   "light":      $light,
+//   "dark":       $dark
+// );
