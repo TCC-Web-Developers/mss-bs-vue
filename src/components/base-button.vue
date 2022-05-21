@@ -1,4 +1,68 @@
-<script setup>
+<script>
+const baseClass = 'btn';
+const variantButton = ['soft', 'ghost', 'outline'];
+
+const _props = {
+    theme: {
+        type: String,
+        default: '',
+    },
+    active: {
+        type: Boolean,
+        default: false,
+    },
+    size: {
+        type: String,
+        default: '',
+    },
+    elevate: {
+        type: Boolean,
+        default: false,
+    }
+}
+
+variantButton.map(variant => {
+    _props[variant] = {
+            type: Boolean,
+            default: false,
+        }
+})
+
+export default {
+    props: _props,
+    setup(props) {
+
+        const styleClass = reactive({});
+        const hasTheme = computed(() => {
+            return props.theme.trim() != '';
+        });
+
+
+        let hasVariant = false;
+
+        variantButton.map(variant => {
+            if (props[variant] && hasTheme) {
+                let variantStyleName = `${baseClass}-${variant}-${props.theme}`;
+                styleClass[variantStyleName] = true;
+                hasVariant = true;
+            }
+        })
+
+        if (!hasVariant && hasTheme) {
+            let themeClass = baseClass + '-' + props.theme.trim();
+            styleClass[themeClass] = true;
+        }
+
+
+        return {
+            styleClass
+        }
+  
+    }
+}
+</script>
+
+<!--<script setup>
 const props = defineProps({
     theme: {
         type: String,
@@ -44,6 +108,7 @@ if (props.soft && hasTheme) {
     }
 }
 </script>
+-->
 
 <template>
     <button
